@@ -68,8 +68,6 @@
 
     </div>
 
-    @inject ('productImageHelper', 'Webkul\Product\Helpers\ProductImage')
-
     <div class="cart-item-list mt-20">
         @foreach ($cart->items as $item)
             @php
@@ -78,7 +76,7 @@
 
             <div class="item mb-5" style="margin-bottom: 5px;">
                 <div class="item-image">
-                    <img src="{{ $productBaseImage['medium_image_url'] }}" />
+                    <img src="{{ $productBaseImage['medium_image_url'] }}"  alt=""/>
                 </div>
 
                 <div class="item-details">

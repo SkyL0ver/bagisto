@@ -17,6 +17,7 @@ return [
 
     'common' => [
         'error' => 'Something went wrong, please try again later.',
+        'image-upload-limit' => 'De maximale uploadgrootte van de afbeelding is 2 MB',
         'no-result-found' => 'We could not find any records.'
     ],
 
@@ -71,7 +72,8 @@ return [
         'page-title' => config('app.name') . ' - Search',
         'found-results' => 'Search Results Found',
         'found-result' => 'Search Result Found',
-        'analysed-keywords' => 'Analysed Keywords'
+        'analysed-keywords' => 'Analysed Keywords',
+        'image-search-option' => 'Image Search Option'
     ],
 
     'reviews' => [
@@ -376,7 +378,8 @@ return [
                 'expired' => 'Expired',
                 'remaining-downloads' => 'Resterende downloads',
                 'unlimited' => 'Onbeperkt',
-                'download-error' => 'Downloadlink is verlopen.'
+                'download-error' => 'Downloadlink is verlopen.',
+                'payment-error' => 'Payment has not been done for this download.'
             ],
 
             'review' => [
@@ -444,6 +447,8 @@ return [
         'available-for-order' => 'Beschikbaar voor bestelling',
         'settings' => 'Settings',
         'compare_options' => 'Compare Options',
+        'wishlist-options' => 'Wishlist Options',
+        'offers' => 'Buy :qty for :price each and save :discount%',
     ],
 
     // 'reviews' => [
@@ -498,7 +503,8 @@ return [
             'link-missing' => '',
             'event' => [
                 'expired' => 'This event has been expired.'
-            ]
+            ],
+            'minimum-order-message' => 'Minimum order amount is :amount'
         ],
 
         'onepage' => [

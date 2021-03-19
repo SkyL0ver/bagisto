@@ -1,54 +1,106 @@
-<script src="https://www.paypal.com/sdk/js?client-id={{core()->getConfigData('sales.paymentmethods.paypal_smart_button.client_id')}}"></script>
+@if (request()->route()->getName() == 'shop.checkout.onepage.index')
 
-<script>
-    window.onload = (function() {
-        eventBus.$on('after-payment-method-selected', function(payment) {
-            if (payment.method != 'paypal_smart_button') {
-                $('.paypal-buttons').remove();
+    @php
+        $clientId = core()->getConfigData('sales.paymentmethods.paypal_smart_button.client_id');
+        $acceptedCurrency = core()->getConfigData('sales.paymentmethods.paypal_smart_button.accepted_currencies');
+    @endphp
 
-                return;
-            }
+    <script src="https://www.paypal.com/sdk/js?client-id={{ $clientId }}&currency={{ $acceptedCurrency }}" data-partner-attribution-id="Bagisto_Cart"></script>
 
-            var options = {
-                style: {
-                    layout:  'vertical',
-                    shape:   'rect',
-                },
+    <style>
+        .component-frame.visible {
+            z-index: 1 !important;
+        }
+    </style>
 
-                enableStandardCardFields: false,
+    <script>
+        let messages = {
+            universalError: "{{ __('paypal::app.error.universal-error') }}",
+            sdkValidationError: "{{ __('paypal::app.error.sdk-validation-error') }}",
+            authorizationError: "{{ __('paypal::app.error.authorization-error') }}"
+        };
 
-                createOrder: function(data, actions) {
-                    return window.axios.get("{{ route('paypal.smart_button.details') }}")
-                        .then(function(response) {
-                            return actions.order.create(response.data);
-                        })
-                        .catch(function (error) {})
-                },
+        window.onload = (function() {
+            eventBus.$on('after-payment-method-selected', function (payment) {
+                if (payment.method != 'paypal_smart_button') {
+                    $('.paypal-buttons').remove();
 
-                // Finalize the transaction
-                onApprove: function(data, actions) {
-                    return actions.order.capture().then(function(details) {
-                        return window.axios.post("{{ route('paypal.smart_button.save_order') }}", {
-                                '_token': "{{ csrf_token() }}",
-                                'data' : details
-                            })
+                    return;
+                }
+
+                if (typeof paypal == 'undefined') {
+                    options.alertBox(messages.sdkValidationError);
+
+                    return;
+                }
+
+                let options = {
+                    style: {
+                        layout:  'vertical',
+                        shape:   'rect',
+                    },
+
+                    authorizationFailed: false,
+
+                    enableStandardCardFields: false,
+
+                    alertBox: function (message) {
+                        window.flashMessages = [{'type': 'alert-error', 'message': message }];
+                        window.flashMessages.alertMessage = message;
+                        app.addFlashMessages();
+                    },
+
+                    createOrder: function(data, actions) {
+                        return window.axios.get("{{ route('paypal.smart-button.create-order') }}")
                             .then(function(response) {
-                                if (response.data.success) {
-                                    if (response.data.redirect_url) {
-                                        window.location.href = response.data.redirect_url;
-                                    } else {
-                                        window.location.href = "{{ route('shop.checkout.success') }}";
-                                    }
-                                }
+                                return response.data.result;
+                            })
+                            .then(function(orderData) {
+                                return orderData.id;
                             })
                             .catch(function (error) {
-                                window.location.href = "{{ route('shop.checkout.cart.index') }}";
-                            })
-                    });
-                }
-            };
+                                if (error.response.data.error === 'invalid_client') {
+                                    options.authorizationFailed = true;
+                                    options.alertBox(messages.authorizationError);
+                                }
 
-            paypal.Buttons(options).render(".paypal-button-container");
+                                return error;
+                            });
+                    },
+
+                    onApprove: function(data, actions) {
+                        app.showLoader();
+
+                        window.axios.post("{{ route('paypal.smart-button.capture-order') }}", {
+                            _token: "{{ csrf_token() }}",
+                            orderData: data
+                        })
+                        .then(function(response) {
+                            if (response.data.success) {
+                                if (response.data.redirect_url) {
+                                    window.location.href = response.data.redirect_url;
+                                } else {
+                                    window.location.href = "{{ route('shop.checkout.success') }}";
+                                }
+                            }
+
+                            app.hideLoader()
+                        })
+                        .catch(function (error) {
+                            window.location.href = "{{ route('shop.checkout.cart.index') }}";
+                        })
+                    },
+
+                    onError: function (error) {
+                        if (! options.authorizationFailed) {
+                            options.alertBox(error);
+                        }
+                    }
+                };
+
+                paypal.Buttons(options).render('.paypal-button-container');
+            });
         });
-    });
-</script>
+    </script>
+
+@endif

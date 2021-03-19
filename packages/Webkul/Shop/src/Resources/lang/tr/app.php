@@ -17,6 +17,7 @@ return [
 
     'common' => [
         'error' => 'Bir şeyler ters gitti, lütfen tekrar deneyin.',
+        'image-upload-limit' => 'Maksimum resim yükleme boyutu 2 MB',
         'no-result-found' => 'Kayıt bulunamadı.'
     ],
 
@@ -69,7 +70,8 @@ return [
         'no-results' => 'Sonuç Bulunamadı',
         'page-title' => config('app.name') . ' - Arama',
         'found-results' => 'Arama Sonuçları',
-        'found-result' => 'Arama Sonuçları'
+        'found-result' => 'Arama Sonuçları',
+        'image-search-option' => 'Image Search Option'
     ],
 
     'reviews' => [
@@ -369,7 +371,8 @@ return [
                 'expired' => 'Süresi Doldu',
                 'remaining-downloads' => 'Kalan İndirme',
                 'unlimited' => 'Sınırsız',
-                'download-error' => 'İndirme linki süresi doldu.'
+                'download-error' => 'İndirme linki süresi doldu.',
+                'payment-error' => 'Payment has not been done for this download.'
             ],
 
             'review' => [
@@ -437,6 +440,8 @@ return [
         'available-for-order' => 'Sipariş İçin Uygun',
         'settings' => 'Settings',
         'compare_options' => 'Compare Options',
+        'wishlist-options' => 'Wishlist Options',
+        'offers' => 'Buy :qty for :price each and save :discount%',
     ],
 
     // 'reviews' => [
@@ -491,7 +496,8 @@ return [
             'link-missing' => '',
             'event' => [
                 'expired' => 'Bu eylemin geçerliliği sona erdi.'
-            ]
+            ],
+            'minimum-order-message' => 'Minimum order amount is :amount'
         ],
 
         'onepage' => [

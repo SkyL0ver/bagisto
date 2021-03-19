@@ -74,23 +74,33 @@ return [
         'taxes' => 'IVA',
         'tax-categories' => 'Categorie IVA',
         'tax-rates' => 'Aliquote IVA',
+        'marketing' => 'Marketing',
         'promotions' => 'Promozioni',
+        'email-marketing' => 'Email Marketing',
+        'campaigns' => 'Campaigns',
+        'email-templates' => 'Email Templates',
         'discount' => 'Sconti',
-        'cms' => 'CMS'
+        'cms' => 'CMS',
+        'transactions' => 'Transactions'
     ],
 
     'acl' => [
         'dashboard' => 'Dashboard',
         'sales' => 'Vendite',
+        'cancel' => 'Cancel',
         'orders' => 'Ordini',
         'shipments' => 'Spedizioni',
         'invoices' => 'Fatture',
+        'refunds' => 'Refunds',
         'catalog' => 'Catalogo',
         'products' => 'Prodotti',
+        'copy' => 'Copy',
         'categories' => 'Categorie',
         'attributes' => 'Attributi',
         'attribute-families' => 'Famiglie Attributi',
         'customers' => 'Clienti',
+        'addresses' => 'Addresses',
+        'note' => 'Note',
         'groups' => 'Gruppi',
         'reviews' => 'Recensioni',
         'newsletter-subscriptions' => 'Iscrizioni Newsletter',
@@ -107,9 +117,13 @@ return [
         'taxes' => 'IVA',
         'tax-categories' => 'Categorie IVA',
         'tax-rates' => 'Aliquote IVA',
+        'view' => 'View',
         'edit' => 'Modifica',
         'create' => 'Aggiungi',
         'delete' => 'Elimina',
+        'mass-delete' => 'Mass Delete',
+        'mass-update' => 'Mass Update',
+        'marketing' => 'Marketing',
         'promotions' => 'Promozioni',
         'cart-rules' => 'Regole Carrello',
         'catalog-rules' => 'Regole Catalogo',
@@ -188,6 +202,7 @@ return [
         'shipment-date' => 'Data Spedizione',
         'shipment-to' => 'Spedizione A',
         'sku' => 'SKU',
+        'product-number' => 'Numero del prodotto',
         'price' => 'Prezzo',
         'qty' => 'Quantità',
         'permission-type' => 'Tipo Permessi',
@@ -225,7 +240,9 @@ return [
         'view' => 'Vedi',
         'rtl' => 'RTL',
         'ltr' => 'LTR',
-        'update-status' => 'Update Stato'
+        'update-status' => 'Update Stato',
+        'transaction-id' => 'Transaction Id',
+        'transaction-date' => 'Transaction Date',
     ],
 
     'account' => [
@@ -378,7 +395,8 @@ return [
             'submit-comment' => 'Invia Commento',
             'notify-customer' => 'Notifica Cliente',
             'customer-notified' => ':date | Cliente <b>Notificato</b>',
-            'customer-not-notified' => ':date | Cliente <b>Non Notificato</b>'
+            'customer-not-notified' => ':date | Cliente <b>Non Notificato</b>',
+            'transactions' => 'Transactions'
         ],
 
         'invoices' => [
@@ -454,6 +472,20 @@ return [
             'view-title' => 'Rimborso #:refund_id',
             'invalid-refund-amount-error' => 'La somma rimborsata dovrebbe essere diversa da zero.'
 
+        ],
+
+        'transactions' => [
+            'title'               => 'Transactions',
+            'id'                  => 'Id',
+            'transaction-id'      => 'Transaction Id',
+            'payment-method'      => 'Payment method',
+            'action'              => 'Action',
+            'view-title'          => 'Transaction #:transaction_id',
+            'transaction-data'    => 'Transaction Data',
+            'order-id'            => 'Order Id',
+            'status'              => 'Status',
+            'created-at'          => 'Created At',
+            'transaction-details' => 'Transaction Details'
         ]
     ],
 
@@ -529,7 +561,13 @@ return [
             'multiselect' => 'Multiselect',
             'new-option' => 'Nuova Opzione',
             'is-default' => 'È Predefinita',
-            'actions' => 'Azioni'
+            'actions' => 'Azioni',
+            'remove-image-btn-title' => 'Remove Image',
+            'videos' => 'Videos',
+            'video' => 'Video',
+            'add-video-btn-title' => 'Add Video',
+            'remove-video-btn-title' => 'Remove Video',
+            'not-support-video' => 'Your browser does not support the video tag.',
         ],
 
         'attributes' => [
@@ -806,7 +844,9 @@ return [
             'seo-title' => 'Meta title',
             'seo-description' => 'Meta description',
             'seo-keywords' => 'Meta keywords',
-
+            'maintenance-mode' => 'Maintenance Mode',
+            'maintenance-mode-text' => 'Message',
+            'allowed-ips' => 'Allowed IPs'
         ],
 
         'sliders' => [
@@ -1124,6 +1164,68 @@ return [
         ]
     ],
 
+    'marketing' => [
+        'templates' => [
+            'title' => 'Email Templates',
+            'add-title' => 'Add Email Template',
+            'edit-title' => 'Edit Email Template',
+            'save-btn-title' => 'Save',
+            'general' => 'General',
+            'name' => 'Name',
+            'status' => 'Status',
+            'active' => 'Active',
+            'inactive' => 'Inactive',
+            'draft' => 'Draft',
+            'content' => 'Content',
+            'create-success' => 'Email template created successfully.',
+            'update-success' => 'Email template updated successfully.',
+            'delete-success' => 'Email template deleted successfully',
+        ],
+
+        'campaigns' => [
+            'title' => 'Campaigns',
+            'add-title' => 'Add Campaign',
+            'edit-title' => 'Edit Campaign',
+            'save-btn-title' => 'Save',
+            'general' => 'General',
+            'name' => 'Name',
+            'status' => 'Status',
+            'active' => 'Active',
+            'inactive' => 'Inactive',
+            'subject' => 'Subject',
+            'email-template' => 'Email Template',
+            'audience' => 'Audience',
+            'channel' => 'Channel',
+            'customer-group' => 'Customer Group',
+            'schedule' => 'Schedule',
+            'schedule-type' => 'Schedule Type',
+            'once' => 'Once',
+            'events' => 'Events',
+            'schedule-date' => 'Schedule Date',
+            'spooling' => 'Spooling',
+            'event' => 'Event',
+            'birthday' => 'Birthday',
+            'create-success' => 'Campaign created successfully.',
+            'update-success' => 'Campaign updated successfully.',
+            'delete-success' => 'Campaign deleted successfully',
+        ],
+
+        'events' => [
+            'title' => 'Events',
+            'add-title' => 'Add Event',
+            'edit-title' => 'Edit Event',
+            'save-btn-title' => 'Save',
+            'general' => 'General',
+            'name' => 'Name',
+            'description' => 'Description',
+            'date' => 'Date',
+            'create-success' => 'Event created successfully.',
+            'update-success' => 'Event updated successfully.',
+            'delete-success' => 'Event deleted successfully.',
+            'edit-error' => 'Can not edit this event.'
+        ]
+    ],
+
     'error' => [
         'go-to-home' => 'TORNA A HOME',
         'in-maitainace' => 'In Manutezione',
@@ -1253,6 +1355,10 @@ return [
         ],
         'system' => [
             'catalog' => 'Catalogo',
+            'homepage' => 'Homepage configuration',
+            'allow-no-of-new-product-homepage' => 'Allowed No of New Product in Homepage',
+            'allow-no-of-featured-product-homepage' => 'Allowed No of Featured Product in Homepage',
+            'allow-out-of-stock-items' => 'Allow out of stock items',
             'products' => 'Prodotti',
             'guest-checkout' => 'Checkout come Ospite',
             'allow-guest-checkout' => 'Consenti Checkout come Ospite',
@@ -1281,11 +1387,12 @@ return [
             'description' => 'Descrizione',
             'rate' => 'Tasso',
             'status' => 'Stato',
+            'calculate-tax' => 'Calcola le tasse',
             'type' => 'Tipo',
             'payment-methods' => 'Metodi di Pagamento',
             'cash-on-delivery' => 'Contrassegno',
             'money-transfer' => 'Bonifico',
-            'paypal-standard' => 'Paypal Standard',
+            'paypal-standard' => 'PayPal Standard',
             'business-account' => 'Account Business',
             'newsletter' => 'Iscrizione a NewsLetter',
             'newsletter-subscription' => 'Consenti Iscrizione a NewsLetter',
@@ -1317,6 +1424,8 @@ return [
             'order-number-length' => 'Lunghezza Numero Ordine',
             'order-number-suffix' => 'Suffisso Numero Ordine',
             'order-number-generator-class' => 'Generatore di numeri dordine',
+            'minimum-order' => 'Minimum Order Settings',
+            'minimum-order-amount' => 'Minimum Order Amount',
             'default' => 'Default',
             'sandbox' => 'Sandbox',
             'all-channels' => 'Tutti',
@@ -1361,9 +1470,14 @@ return [
             'custom-scripts' => 'Custom Scripts',
             'custom-css' => 'Custom CSS',
             'custom-javascript' => 'Custom Javascript',
-            'paypal-smart-button' => 'Paypal Smart Button',
+            'paypal-smart-button' => 'PayPal',
             'client-id' => 'Client Id',
-            'client-id-info' => 'Use "sb" for testing.'
+            'client-id-info' => 'Use "sb" for testing.',
+            'client-secret' => 'Client Secret',
+            'client-secret-info' => 'Add your secret key here',
+            'accepted-currencies' => 'Accepted currencies',
+            'accepted-currencies-info' => 'Add currency code comma seperated e.g. USD,INR,...',
+            'buy-now-button-display' => 'Allow customers to directly buy products'
         ]
     ]
 ];

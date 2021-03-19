@@ -19,5 +19,7 @@ class EventServiceProvider extends ServiceProvider
         Event::listen('bagisto.shop.layout.body.after', static function(ViewRenderEventManager $viewRenderEventManager) {
             $viewRenderEventManager->addTemplate('paypal::checkout.onepage.paypal-smart-button');
         });
+
+        Event::listen('sales.invoice.save.after', 'Webkul\Paypal\Listeners\Transaction@saveTransaction');
     }
 }

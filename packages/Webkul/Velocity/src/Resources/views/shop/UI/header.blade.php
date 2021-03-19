@@ -1,7 +1,7 @@
 @push('scripts')
     <script type="text/x-template" id="content-header-template">
         <header class="row velocity-divide-page vc-header header-shadow active">
-            <div class="vc-small-screen container" v-if="isMobile()">
+            <div class="vc-small-screen container">
                 <div class="row">
                     <div class="col-6">
                         <div v-if="hamburger" class="nav-container scrollable">
@@ -23,7 +23,7 @@
 
                                         <i
                                             @click="closeDrawer()"
-                                            class="material-icons pull-right text-dark">
+                                            class="material-icons float-right text-dark">
                                             cancel
                                         </i>
                                     </span>
@@ -72,7 +72,7 @@
                                                 <img
                                                     class="category-icon"
                                                     v-if="category.category_icon_path"
-                                                    :src="`${$root.baseUrl}/storage/${category.category_icon_path}`" />
+                                                    :src="`${$root.baseUrl}/storage/${category.category_icon_path}`" alt="" width="20" height="20" />
                                             </div>
                                             <span v-text="category.name"></span>
                                         </a>
@@ -104,12 +104,23 @@
                                             </a>
                                         </li>
 
-                                        <li>
-                                            <a href="{{ route('customer.wishlist.index') }}" class="unset">
-                                                <i class="icon wishlist text-down-3"></i>
-                                                <span>{{ __('shop::app.header.wishlist') }}</span>
-                                            </a>
-                                        </li>
+                                        @if (core()->getConfigData('general.content.shop.wishlist_option'))
+                                            <li>
+                                                <a href="{{ route('customer.wishlist.index') }}" class="unset">
+                                                    <i class="icon wishlist text-down-3"></i>
+                                                    <span>{{ __('shop::app.header.wishlist') }}</span>
+                                                </a>
+                                            </li>
+                                        @endif
+
+                                        @if (core()->getConfigData('general.content.shop.compare_option'))
+                                            <li>
+                                                <a href="{{ route('velocity.customer.product.compare') }}" class="unset">
+                                                    <i class="icon compare text-down-3"></i>
+                                                    <span>{{ __('shop::app.customer.compare.text') }}</span>
+                                                </a>
+                                            </li>
+                                        @endif
 
                                         <li>
                                             <a href="{{ route('customer.orders.index') }}" class="unset">
@@ -134,11 +145,11 @@
                                                 @if ($locale->locale_image)
                                                     <img
                                                         class="language-logo"
-                                                        src="{{ asset('/storage/' . $locale->locale_image) }}" />
+                                                        src="{{ asset('/storage/' . $locale->locale_image) }}" alt="" />
                                                 @elseif ($locale->code == "en")
                                                     <img
                                                         class="language-logo"
-                                                        src="{{ asset('/themes/velocity/assets/images/flags/en.png') }}" />
+                                                        src="{{ asset('/themes/velocity/assets/images/flags/en.png') }}" alt="" />
                                                 @endif
                                             </div>
                                             <span>{{ $locale->name }}</span>
@@ -195,7 +206,7 @@
 
                                     <h4 class="display-inbl">@{{ subCategory.name }}</h4>
 
-                                    <i class="material-icons pull-right text-dark" @click="closeDrawer()">
+                                    <i class="material-icons float-right text-dark" @click="closeDrawer()">
                                         cancel
                                     </i>
                                 </div>
@@ -213,7 +224,7 @@
                                                 <img
                                                     class="category-icon"
                                                     v-if="nestedSubCategory.category_icon_path"
-                                                    :src="`${$root.baseUrl}/storage/${nestedSubCategory.category_icon_path}`" />
+                                                    :src="`${$root.baseUrl}/storage/${nestedSubCategory.category_icon_path}`" alt="" width="20" height="20" />
                                             </div>
                                             <span>@{{ nestedSubCategory.name }}</span>
                                         </a>
@@ -234,7 +245,7 @@
                                                         <img
                                                             class="category-icon"
                                                             v-if="thirdLevelCategory.category_icon_path"
-                                                            :src="`${$root.baseUrl}/storage/${thirdLevelCategory.category_icon_path}`" />
+                                                            :src="`${$root.baseUrl}/storage/${thirdLevelCategory.category_icon_path}`" alt="" width="20" height="20" />
                                                     </div>
                                                     <span>@{{ thirdLevelCategory.name }}</span>
                                                 </a>
@@ -248,7 +259,7 @@
                                 <div class="drawer-section">
                                     <i class="rango-arrow-left fs24 text-down-4" @click="toggleMetaInfo('languages')"></i>
                                     <h4 class="display-inbl">{{ __('velocity::app.responsive.header.languages') }}</h4>
-                                    <i class="material-icons pull-right text-dark" @click="closeDrawer()">cancel</i>
+                                    <i class="material-icons float-right text-dark" @click="closeDrawer()">cancel</i>
                                 </div>
 
                                 <ul type="none">
@@ -266,14 +277,14 @@
                                                     <div class="category-logo">
                                                         <img
                                                         class="category-icon"
-                                                        src="{{ asset('/themes/velocity/assets/images/flags/en.png') }}" />
+                                                        src="{{ asset('/themes/velocity/assets/images/flags/en.png') }}" alt="" width="20" height="20" />
                                                     </div>
                                                 @else
 
                                                     <div class="category-logo">
                                                         <img
                                                         class="category-icon"
-                                                        src="{{ asset('/storage/' . $locale->locale_image) }}" />
+                                                        src="{{ asset('/storage/' . $locale->locale_image) }}" alt="" width="20" height="20" />
                                                     </div>
                                                 @endif
 
@@ -290,7 +301,7 @@
                                 <div class="drawer-section">
                                     <i class="rango-arrow-left fs24 text-down-4" @click="toggleMetaInfo('currencies')"></i>
                                     <h4 class="display-inbl">{{ __('velocity::app.shop.general.currencies') }}</h4>
-                                    <i class="material-icons pull-right text-dark" @click="closeDrawer()">cancel</i>
+                                    <i class="material-icons float-right text-dark" @click="closeDrawer()">cancel</i>
                                 </div>
 
                                 <ul type="none">
@@ -323,7 +334,8 @@
                     </div>
 
                     @php
-                        $showCompare = core()->getConfigData('general.content.shop.compare_option') == "1" ? true : false
+                        $showCompare = core()->getConfigData('general.content.shop.compare_option') == "1" ? true : false;
+                        $showWishlist = core()->getConfigData('general.content.shop.wishlist_option') == "1" ? true : false;
                     @endphp
 
                     <div class="right-vc-header col-6">
@@ -346,12 +358,14 @@
                             </a>
                         @endif
 
-                        <a class="wishlist-btn unset" :href="`${isCustomer ? '{{ route('customer.wishlist.index') }}' : '{{ route('velocity.product.guest-wishlist') }}'}`">
-                            <div class="badge-container" v-if="wishlistCount > 0">
-                                <span class="badge" v-text="wishlistCount"></span>
-                            </div>
-                            <i class="material-icons">favorite_border</i>
-                        </a>
+                        @if ($showWishlist)
+                            <a class="wishlist-btn unset" :href="`{{ route('customer.wishlist.index') }}`">
+                                <div class="badge-container" v-if="wishlistCount > 0">
+                                    <span class="badge" v-text="wishlistCount"></span>
+                                </div>
+                                <i class="material-icons">favorite_border</i>
+                            </a>
+                        @endif
 
                         <a class="unset cursor-pointer" @click="openSearchBar">
                             <i class="material-icons">search</i>
@@ -370,7 +384,7 @@
             </div>
 
             <div
-                v-else
+               id="main-category"
                 @mouseout="toggleSidebar('0', $event, 'mouseout')"
                 @mouseover="toggleSidebar('0', $event, 'mouseover')"
                 :class="`main-category fs16 unselectable fw6 ${($root.sharedRootCategories.length > 0) ? 'cursor-pointer' : 'cursor-not-allowed'} left`">
@@ -513,11 +527,6 @@
                     updateHeaderItemsCount: function () {
                         if (! this.isCustomer) {
                             let comparedItems = this.getStorageValue('compared_product');
-                            let wishlistedItems = this.getStorageValue('wishlist_product');
-
-                            if (wishlistedItems) {
-                                this.wishlistCount = wishlistedItems.length;
-                            }
 
                             if (comparedItems) {
                                 this.compareCount = comparedItems.length;

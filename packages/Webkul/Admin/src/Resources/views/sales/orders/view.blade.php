@@ -14,7 +14,7 @@
                 <h1>
                     {!! view_render_event('sales.order.title.before', ['order' => $order]) !!}
 
-                    <i class="icon angle-left-icon back-link" onclick="window.location = history.length > 1 ? document.referrer : '{{ route('admin.dashboard.index') }}'"></i>
+                    <i class="icon angle-left-icon back-link" onclick="window.location = '{{ route('admin.sales.orders.index') }}'"></i>
 
                     {{ __('admin::app.sales.orders.view-title', ['order_id' => $order->increment_id]) }}
 
@@ -25,7 +25,7 @@
             <div class="page-action">
                 {!! view_render_event('sales.order.page_action.before', ['order' => $order]) !!}
 
-                @if ($order->canCancel())
+                @if ($order->canCancel() && bouncer()->hasPermission('sales.orders.cancel'))
                     <a href="{{ route('admin.sales.orders.cancel', $order->id) }}" class="btn btn-lg btn-primary" v-alert:message="'{{ __('admin::app.sales.orders.cancel-confirm-msg') }}'">
                         {{ __('admin::app.sales.orders.cancel-btn-title') }}
                     </a>
@@ -454,8 +454,14 @@
 
                                         <tr class="bold">
                                             <td>{{ __('admin::app.sales.orders.total-due') }}</td>
+
                                             <td>-</td>
-                                            <td>{{ core()->formatBasePrice($order->base_total_due) }}</td>
+
+                                            @if($order->status !== 'canceled')
+                                                <td>{{ core()->formatBasePrice($order->base_total_due) }}</td>
+                                            @else
+                                                <td id="due-amount-on-cancelled">{{ core()->formatBasePrice(0.00) }}</td>
+                                            @endif
                                         </tr>
                                     </table>
                                 </div>
@@ -503,6 +509,7 @@
                                         <td class="empty" colspan="7">{{ __('admin::app.common.no-result-found') }}</td>
                                     <tr>
                                 @endif
+                            </tbody>
                         </table>
                     </div>
 
@@ -545,6 +552,7 @@
                                         <td class="empty" colspan="7">{{ __('admin::app.common.no-result-found') }}</td>
                                     <tr>
                                 @endif
+                            </tbody>
                         </table>
                     </div>
 
@@ -589,6 +597,49 @@
                                         <td class="empty" colspan="7">{{ __('admin::app.common.no-result-found') }}</td>
                                     <tr>
                                 @endif
+                            </tbody>
+                        </table>
+                    </div>
+
+                </tab>
+
+                <tab name="{{ __('admin::app.sales.orders.transactions') }}">
+
+                    <div class="table" style="padding: 20px 0">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>{{ __('admin::app.sales.transactions.transaction-id') }}</th>
+                                    <th>{{ __('admin::app.sales.invoices.order-id') }}</th>
+                                    <th>{{ __('admin::app.sales.transactions.payment-method') }}</th>
+                                    <th>{{ __('admin::app.sales.transactions.action') }}</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+
+                                @foreach ($order->transactions as $transaction)
+                                    <tr>
+                                        <td>#{{ $transaction->transaction_id }}</td>
+                                        <td>{{ $transaction->order_id }}</td>
+                                        <td>
+                                            {{ core()->getConfigData('sales.paymentmethods.' . $transaction->payment_method . '.title') }}
+                                        </td>
+                                        <td class="action">
+                                            <a href="{{ route('admin.sales.transactions.view', $transaction->id) }}">
+                                                <i class="icon eye-icon"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+
+                                @if (! $order->transactions->count())
+                                    <tr>
+                                        <td class="empty" colspan="7">{{ __('admin::app.common.no-result-found') }}</td>
+                                    <tr>
+                                @endif
+
+                            </tbody>
                         </table>
                     </div>
 

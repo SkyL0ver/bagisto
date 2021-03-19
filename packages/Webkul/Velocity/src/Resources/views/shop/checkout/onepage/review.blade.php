@@ -1,5 +1,3 @@
-@inject ('productImageHelper', 'Webkul\Product\Helpers\ProductImage')
-
 <div class="form-container review-checkout-conainer">
     <accordian :title="'{{ __('shop::app.checkout.onepage.summary') }}'" :active="true">
         <div class="form-header mb-30" slot="header">
@@ -81,7 +79,7 @@
 
                     <div class="row col-12 no-padding">
                         <div class="col-2 max-sm-img-dimention">
-                            <img src="{{ $productBaseImage['medium_image_url'] }}" />
+                            <img src="{{ $productBaseImage['medium_image_url'] }}" alt="" />
                         </div>
 
                         <div class="col-10 no-padding fs16">

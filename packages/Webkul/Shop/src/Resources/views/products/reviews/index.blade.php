@@ -9,16 +9,14 @@
     <section class="review">
 
         <div class="review-layouter">
-            @inject ('productImageHelper', 'Webkul\Product\Helpers\ProductImage')
-
             @inject ('reviewHelper', 'Webkul\Product\Helpers\Review')
 
-            <?php $productBaseImage = $productImageHelper->getProductBaseImage($product); ?>
+            <?php $productBaseImage = productimage()->getProductBaseImage($product); ?>
 
             <div class="product-info">
                 <div class="product-image">
                     <a href="{{ route('shop.productOrCategory.index', $product->url_key) }}" title="{{ $product->name }}">
-                        <img src="{{ $productBaseImage['medium_image_url'] }}" />
+                        <img src="{{ $productBaseImage['medium_image_url'] }}" alt="" />
                     </a>
                 </div>
 

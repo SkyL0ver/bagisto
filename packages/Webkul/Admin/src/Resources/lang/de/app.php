@@ -72,25 +72,35 @@ return [
         'roles'                    => 'Rollen',
         'sliders'                  => 'Slider',
         'taxes'                    => 'Steuern',
+        'marketing'                => 'Marketing',
+        'promotions'               => 'Promotions',
+        'email-marketing' => 'Email Marketing',
+        'campaigns' => 'Campaigns',
+        'email-templates' => 'Email Templates',
         'tax-categories'           => 'Steuer-Kategorien',
         'tax-rates'                => 'Steuersätze',
-        'promotions'               => 'Promotions',
         'discount'                 => 'Rabatt',
         'cms'                      => 'CMS',
+        'transactions'             => 'Transactions'
     ],
     'acl'           =>
     [
         'dashboard'                => 'Dashboard',
         'sales'                    => 'Vertrieb',
+        'cancel'                   => 'Cancel',
         'orders'                   => 'Bestellungen',
         'shipments'                => 'Sendungen',
         'invoices'                 => 'Rechnungen',
+        'refunds'                  => 'Refunds',
         'catalog'                  => 'Katalog',
         'products'                 => 'Produkte',
+        'copy'                     => 'Copy',
         'categories'               => 'Kategorien',
         'attributes'               => 'Attribute',
         'attribute-families'       => 'Attributgruppen',
         'customers'                => 'Kunden',
+        'addresses'                => 'Addresses',
+        'note'                     => 'Note',
         'groups'                   => 'Gruppen',
         'reviews'                  => 'Bewertungen',
         'newsletter-subscriptions' => 'Newsletter-Abonnements',
@@ -107,9 +117,13 @@ return [
         'taxes'                    => 'Steuern',
         'tax-categories'           => 'Steuerkategorien',
         'tax-rates'                => 'Steuersätze',
+        'view'                     => 'View',
         'edit'                     => 'Bearbeiten',
         'create'                   => 'Hinzufügen',
         'delete'                   => 'Löschen',
+        'mass-delete'              => 'Mass Delete',
+        'mass-update'              => 'Mass Update',
+        'marketing'                => 'Marketing',
         'promotions'               => 'Promotions',
         'cart-rules'               => 'Warenkorbregeln',
         'catalog-rules'            => 'Katalogregeln',
@@ -188,6 +202,7 @@ return [
         'shipment-date'    => 'Versand Datum',
         'shipment-to'      => 'Versand',
         'sku'              => 'SKU',
+        'product-number'   => 'Produktnummer',
         'price'            => 'Preis',
         'qty'              => 'Menge',
         'permission-type'  => 'Berechtigungsart',
@@ -226,6 +241,8 @@ return [
         'rtl'              => 'RTL',
         'ltr'              => 'LTR',
         'update-status'    => 'Update-Status',
+        'transaction-id'   => 'Transaction Id',
+        'transaction-date' => 'Transaction Date',
     ],
     'account'       =>
     [
@@ -374,6 +391,7 @@ return [
             'cancel-confirm-msg' => 'Sind Sie sicher, dass Sie diese Bestellung stornieren möchten?',
             'refund-btn-title' => 'Rückerstattung',
             'refunds' => 'Erstattungen',
+            'transactions' => 'Transactions'
         ],
         'invoices' =>
         [
@@ -448,6 +466,20 @@ return [
             'view-title' => 'Rückerstattung #:refund_id',
             'invalid-refund-amount-error' => 'Der Rückerstattungsbetrag sollte nicht Null sein.',
         ],
+
+        'transactions' => [
+            'title'               => 'Transactions',
+            'id'                  => 'Id',
+            'transaction-id'      => 'Transaction Id',
+            'payment-method'      => 'Payment method',
+            'action'              => 'Action',
+            'view-title'          => 'Transaction #:transaction_id',
+            'transaction-data'    => 'Transaction Data',
+            'order-id'            => 'Order Id',
+            'status'              => 'Status',
+            'created-at'          => 'Created At',
+            'transaction-details' => 'Transaction Details'
+        ]
     ],
     'catalog' =>
     [
@@ -520,6 +552,12 @@ return [
             'multiselect'                   => 'Multiselect',
             'new-option'                    => 'Neue Option',
             'is-default'                    => 'Ist Standard',
+            'remove-image-btn-title' => 'Remove Image',
+            'videos' => 'Videos',
+            'video' => 'Video',
+            'add-video-btn-title' => 'Add Video',
+            'remove-video-btn-title' => 'Remove Video',
+            'not-support-video' => 'Your browser does not support the video tag.',
         ],
         'attributes' =>
         [
@@ -803,6 +841,9 @@ return [
             'seo-title'              => 'Meta Titel',
             'seo-description'        => 'Meta-Beschreibung',
             'seo-keywords'           => 'Meta-keywords',
+            'maintenance-mode'       => 'Maintenance Mode',
+            'maintenance-mode-text'  => 'Message',
+            'allowed-ips'            => 'Allowed IPs'
         ],
         'sliders'           =>
         [
@@ -1120,6 +1161,69 @@ return [
             'attribute_family'             => 'Attributgruppe',
         ],
     ],
+
+    'marketing' => [
+        'templates' => [
+            'title' => 'Email Templates',
+            'add-title' => 'Add Email Template',
+            'edit-title' => 'Edit Email Template',
+            'save-btn-title' => 'Save',
+            'general' => 'General',
+            'name' => 'Name',
+            'status' => 'Status',
+            'active' => 'Active',
+            'inactive' => 'Inactive',
+            'draft' => 'Draft',
+            'content' => 'Content',
+            'create-success' => 'Email template created successfully.',
+            'update-success' => 'Email template updated successfully.',
+            'delete-success' => 'Email template deleted successfully',
+        ],
+
+        'campaigns' => [
+            'title' => 'Campaigns',
+            'add-title' => 'Add Campaign',
+            'edit-title' => 'Edit Campaign',
+            'save-btn-title' => 'Save',
+            'general' => 'General',
+            'name' => 'Name',
+            'status' => 'Status',
+            'active' => 'Active',
+            'inactive' => 'Inactive',
+            'subject' => 'Subject',
+            'email-template' => 'Email Template',
+            'audience' => 'Audience',
+            'channel' => 'Channel',
+            'customer-group' => 'Customer Group',
+            'schedule' => 'Schedule',
+            'schedule-type' => 'Schedule Type',
+            'once' => 'Once',
+            'events' => 'Events',
+            'schedule-date' => 'Schedule Date',
+            'spooling' => 'Spooling',
+            'event' => 'Event',
+            'birthday' => 'Birthday',
+            'create-success' => 'Campaign created successfully.',
+            'update-success' => 'Campaign updated successfully.',
+            'delete-success' => 'Campaign deleted successfully',
+        ],
+
+        'events' => [
+            'title' => 'Events',
+            'add-title' => 'Add Event',
+            'edit-title' => 'Edit Event',
+            'save-btn-title' => 'Save',
+            'general' => 'General',
+            'name' => 'Name',
+            'description' => 'Description',
+            'date' => 'Date',
+            'create-success' => 'Event created successfully.',
+            'update-success' => 'Event updated successfully.',
+            'delete-success' => 'Event deleted successfully.',
+            'edit-error' => 'Can not edit this event.'
+        ]
+    ],
+
     'error'         =>
     [
         'go-to-home'    => 'HOME ÖFFNEN',
@@ -1259,6 +1363,10 @@ return [
         'system' =>
         [
             'catalog'                      => 'Katalog',
+            'homepage' => 'Homepage configuration',
+            'allow-no-of-new-product-homepage' => 'Allowed No of New Product in Homepage',
+            'allow-no-of-featured-product-homepage' => 'Allowed No of Featured Product in Homepage',
+            'allow-out-of-stock-items' => 'Allow out of stock items',
             'products'                     => 'Produkte',
             'guest-checkout'               => 'Gastbestellungen',
             'allow-guest-checkout'         => 'Gastbestellungen erlauben',
@@ -1287,6 +1395,7 @@ return [
             'description'                  => 'Beschreibung',
             'rate'                         => 'Rate',
             'status'                       => 'Status',
+            'calculate-tax'                => 'Steuern berechnen',
             'type'                         => 'Typ',
             'payment-methods'              => 'Zahlungsmethoden',
             'cash-on-delivery'             => 'Nachnahme',
@@ -1323,6 +1432,8 @@ return [
             'order-number-length'          => 'Auftragsnummer Länge',
             'order-number-suffix'          => 'Auftragsnummer Suffix',
             'order-number-generator-class' => 'Bestell nummern generator',
+            'minimum-order'                => 'Minimum Order Settings',
+            'minimum-order-amount'         => 'Minimum Order Amount',
             'default'                      => 'Standard',
             'sandbox'                      => 'Sandbox',
             'all-channels'                 => 'Alle',
@@ -1338,9 +1449,14 @@ return [
             'custom-scripts' => 'Custom Scripts',
             'custom-css' => 'Custom CSS',
             'custom-javascript' => 'Custom Javascript',
-            'paypal-smart-button' => 'Paypal Smart Button',
+            'paypal-smart-button' => 'PayPal',
             'client-id' => 'Client Id',
-            'client-id-info' => 'Use "sb" for testing.'
+            'client-id-info' => 'Use "sb" for testing.',
+            'client-secret' => 'Client Secret',
+            'client-secret-info' => 'Add your secret key here',
+            'accepted-currencies' => 'Accepted currencies',
+            'accepted-currencies-info' => 'Add currency code comma seperated e.g. USD,INR,...',
+            'buy-now-button-display' => 'Allow customers to directly buy products'
         ],
     ],
 ];

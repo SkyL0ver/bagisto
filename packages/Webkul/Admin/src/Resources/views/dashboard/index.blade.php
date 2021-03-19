@@ -192,8 +192,6 @@
 
             </div>
 
-            @inject ('productImageHelper', 'Webkul\Product\Helpers\ProductImage')
-
             <div class="sale-stock">
                 <div class="card">
                     <div class="card-title">
@@ -208,9 +206,9 @@
                                 <li>
                                     <a href="{{ route('admin.catalog.products.edit', $item->product_id) }}">
                                         <div class="product image">
-                                            <?php $productBaseImage = $productImageHelper->getProductBaseImage($item->product); ?>
+                                            <?php $productBaseImage = productimage()->getProductBaseImage($item->product); ?>
 
-                                            <img class="item-image" src="{{ $productBaseImage['small_image_url'] }}" />
+                                            <img class="item-image" src="{{ $productBaseImage['small_image_url'] ?? asset('vendor/webkul/ui/assets/images/product/small-product-placeholder.webp') }}" />
                                         </div>
 
                                         <div class="description do-not-cross-arrow">
@@ -318,7 +316,7 @@
                                 <li>
                                     <a href="{{ route('admin.catalog.products.edit', $item->product_id) }}">
                                         <div class="image">
-                                            <?php $productBaseImage = $productImageHelper->getProductBaseImage($item->product); ?>
+                                            <?php $productBaseImage = productimage()->getProductBaseImage($item->product); ?>
 
                                             <img class="item-image" src="{{ $productBaseImage['small_image_url'] }}" />
                                         </div>
